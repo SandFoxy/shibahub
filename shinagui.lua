@@ -10,11 +10,11 @@ iRay  | Programming
 
 
 
-local Release = "Beta 7R"
+local Release = "Shiba Hub"
 local NotificationDuration = 6.5
-local RayfieldFolder = "Rayfield"
+local RayfieldFolder = "ShibaHub"
 local ConfigurationFolder = RayfieldFolder.."/Configurations"
-local ConfigurationExtension = ".rfld"
+local ConfigurationExtension = ".dog"
 
 
 
