@@ -1,8 +1,70 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/foxonecup/shibahub/main/shinagui.lua'))()
 
-local Clop = ScriptsWindow:CreateButton({
-   Name = "Test Auto Update",
+local Window = Rayfield:CreateWindow({
+    Name = "SHIBA HUB",
+    LoadingTitle = "DOORS",
+    LoadingSubtitle = "by SandFoxy",
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = "ShibaHub", -- Create a custom folder for your hub/game
+       FileName = "Loader"
+    },
+    Discord = {
+       Enabled = false,
+       Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = true, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "SHIBA HUB",
+       Subtitle = "Activate License",
+       Note = "PM: SandFoxy#5040",
+       FileName = "SHIBAKey",
+       SaveKey = true,
+       GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = "https://pastebin.com/raw/6Dvtfdzb"
+    }
+ })
+
+local ScriptsWindow = Window:CreateTab("Scripts", NULL)
+local OptionsWindow = Window:CreateTab("Options", NULL)
+local InfoWindow = Window:CreateTab("Info", NULL)
+
+local AutoDestroyToggle = InfoWindow:CreateToggle({
+   Name = "Auto-Destroy",
+   CurrentValue = false,
+   Flag = "autodestroy", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
+
+
+local Scripts = ScriptsWindow:CreateSection("Free Scripts")
+local Button = ScriptsWindow:CreateButton({
+    Name = "Start Orca",
+    Callback = function()
+      loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/richie0866/orca/master/public/snapshot.lua"))()
+      if (AutoDestroyToggle.CurrentValue) then
+         Rayfield:Destroy()
+      end
+    end,
+ })
+ local Button = ScriptsWindow:CreateButton({
+   Name = "Start RemoteSpy",
    Callback = function()
-      loadstring(game:HttpGet('https://pastebin.com/raw/r9YnqEhL'))()
+      loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
+     if (AutoDestroyToggle.CurrentValue) then
+        Rayfield:Destroy()
+     end
+   end,
+})
+
+local Button = ScriptsWindow:CreateButton({
+   Name = "Get Update",
+   Callback = function()
+      game:HttpGet('https://raw.githubusercontent.com/foxonecup/shibahub/main/autoupdate')
       if (AutoDestroyToggle.CurrentValue) then
          Rayfield:Destroy()
       end
