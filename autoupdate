@@ -40,7 +40,7 @@ local AutoDestroyToggle = InfoWindow:CreateToggle({
    end,
 })
 
-
+ 
 local Scripts = ScriptsWindow:CreateSection("Free Scripts")
 local Button = ScriptsWindow:CreateButton({
     Name = "Start Orca",
