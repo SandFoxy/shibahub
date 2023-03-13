@@ -1,1 +1,10 @@
 
+local Clop = ScriptsWindow:CreateButton({
+   Name = "Test Auto Update",
+   Callback = function()
+      loadstring(game:HttpGet('https://pastebin.com/raw/r9YnqEhL'))()
+      if (AutoDestroyToggle.CurrentValue) then
+         Rayfield:Destroy()
+      end
+   end,
+})
